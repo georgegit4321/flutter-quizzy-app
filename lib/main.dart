@@ -40,6 +40,19 @@ class _QuizPageState extends State<QuizPage> {
     /*Icon(Icons.done, color: Colors.green),
     Icon(Icons.clear, color: Colors.red),*/
   ];
+
+  void checkAnswer(bool UserAns){
+    if (UserAns==obj.getans()){
+      Scorekeeper.add(Icon(Icons.done, color: Colors.green));
+    }
+    else{
+      Scorekeeper.add(Icon(Icons.clear, color: Colors.red));
+    }
+    setState(() {
+      obj.add();
+    });
+  }
+
   // List<String> questions = ["question 1", 'question 2', 'question 3'];
   // List<String> answers = ['True', 'False', 'True'];
 
@@ -72,15 +85,7 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
-                if (obj.getans() == true) {
-                  Scorekeeper.add(Icon(Icons.done, color: Colors.green));
-                }
-                else{
-                  Scorekeeper.add(Icon(Icons.clear, color: Colors.red));
-                }
-                setState(() {
-                  obj.add();
-                });
+                checkAnswer(true);
               },
               child: Text(
                 'True',
@@ -96,15 +101,7 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
-                if (obj.getans() == false) {
-                  Scorekeeper.add(Icon(Icons.done, color: Colors.green));
-                }
-                else{
-                  Scorekeeper.add(Icon(Icons.clear, color: Colors.red));
-                }
-                setState(() {
-                  obj.add();
-                });
+                checkAnswer(false);
               },
               child: Text(
                 'False',
