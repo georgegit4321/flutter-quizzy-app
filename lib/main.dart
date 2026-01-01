@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/question.dart';
 import 'question.dart';
 import 'quizbank.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 void main() {
   runApp(Quizzy());
@@ -40,13 +42,26 @@ class _QuizPageState extends State<QuizPage> {
     /*Icon(Icons.done, color: Colors.green),
     Icon(Icons.clear, color: Colors.red),*/
   ];
+  int score=0;
 
   void checkAnswer(bool UserAns){
     if (UserAns==obj.getans()){
       Scorekeeper.add(Icon(Icons.done, color: Colors.green));
+      score++;
     }
     else{
       Scorekeeper.add(Icon(Icons.clear, color: Colors.red));
+    }
+    if(obj.is_completed()){
+      Alert(
+        context: context,
+        title: 'Finished',
+        desc: 'score : $score',
+      ).show();
+
+      obj.reset();
+      Scorekeeper = [SizedBox(width: 3, height: 24)];
+      score=0;
     }
     setState(() {
       obj.add();

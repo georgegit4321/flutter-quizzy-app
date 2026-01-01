@@ -15,10 +15,21 @@ class QuizBank{
   bool getans(){
     return _QBank[_qnum].answer;
   }
-  void add(){
-    _qnum = (_qnum + 1)%_QBank.length;
+  void add() {
+    if(_qnum<_QBank.length-1){
+      _qnum++;
+    }
   }
-  int getqnum(){
-    return _qnum;
+  bool is_completed(){
+    if(_qnum==_QBank.length-1){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  void reset(){
+    _qnum=-1;
   }
 }
